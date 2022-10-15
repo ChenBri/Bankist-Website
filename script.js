@@ -32,7 +32,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////
 
 // Tab component
 
@@ -54,6 +54,36 @@ tabContainer.addEventListener('click', function (e) {
   );
   tab.classList.add('operations__content--active');
   console.log(tab);
+});
+
+//////////////////////////////////////////////
+
+// Nav-bar styling:
+
+const nav = document.querySelector('.nav');
+nav.addEventListener('mouseover', function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+    console.log(link);
+    siblings.forEach(item =>
+      item !== link ? (item.style.opacity = 0.5) : (item.style.opacity = 1)
+    );
+    logo.style.opacity = 0.5;
+  }
+});
+
+nav.addEventListener('mouseout', function (e) {
+  const link = e.target;
+  const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+  const logo = link.closest('.nav').querySelector('img');
+  console.log(link);
+  siblings.forEach(item => {
+    item.style.opacity = 1;
+  });
+
+  logo.style.opacity = 1;
 });
 
 //////////////////////////////////////////////
