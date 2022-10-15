@@ -32,6 +32,10 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+
+
+//////////////////////////////////////////////
+
 // Selecting elements:
 const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
