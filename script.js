@@ -55,3 +55,13 @@ header.append(message); // Last child
 document.getElementById('cookie-btn').addEventListener('click', function () {
   message.remove();
 });
+
+// message.style.backgroundColor = '#37383d'
+// message.style.width = '100wh'
+// document.documentElement.style.setProperty('--color-primary', 'red')
+
+const logo = document.querySelector('.nav__logo');
+logo.classList.add('x');
+logo.classList.remove('x');
+logo.classList.toggle('x');
+logo.classList.contains('x');
