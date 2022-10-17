@@ -144,3 +144,86 @@ btnScrollTo.addEventListener('click', function (e) {
 //   h1.removeEventListener('mouseenter', alertH1);
 // };
 // h1.addEventListener('mouseenter', alertH1);
+
+//////////////////////////////////////////////
+
+// Sticky nav-bar
+
+const coords = section1.getBoundingClientRect();
+window.addEventListener('scroll', function (e) {
+  let i = coords.top;
+  if (window.scrollY > i) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
+
+//////////////////////////////////////////////
+
+// Slider
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+let currentSlide = 0;
+const maxSlide = slides.length;
+
+slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
+
+btnRight.addEventListener('click', function (e) {
+  if (currentSlide == maxSlide - 1) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - currentSlide)}%)`)
+  );
+  activateDots(currentSlide);
+});
+
+btnLeft.addEventListener('click', function (e) {
+  if (currentSlide === 0) {
+    currentSlide = maxSlide - 1;
+  } else {
+    currentSlide--;
+  }
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - currentSlide)}%)`)
+  );
+  activateDots(currentSlide);
+});
+
+// Slider dots
+const dotContainer = document.querySelector('.dots');
+const createDots = function () {
+  slides.forEach((slide, index) => {
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot" data-slide="${index}"></button>`
+    );
+  });
+};
+createDots();
+
+dotContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    const slide = e.target.dataset.slide;
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+    activateDots(slide);
+  }
+});
+
+const activateDots = function (slide) {
+  document
+    .querySelectorAll('.dots__dot')
+    .forEach(dot => dot.classList.remove('dots__dot--active'));
+  document
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add('dots__dot--active');
+};
+
+activateDots(0);
