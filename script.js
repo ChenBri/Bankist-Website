@@ -227,3 +227,40 @@ const activateDots = function (slide) {
 };
 
 activateDots(0);
+
+//////////////////////////////////////////////
+
+// Intersection Observer API
+
+// const obsOptions = {
+//   root: null,
+//   threshold: [0, 0.2]
+// };
+
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry)
+//   })
+// };
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+// observer.observe(section1);
+
+// Revealing elements on scroll
+const allSection = document.querySelectorAll('.section');
+const revealSection = function (entries, observer) {
+  const element = entries[0];
+  console.log(element);
+  if (element.isIntersecting) {
+    element.target.classList.remove('section--hidden');
+  }
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSection.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
